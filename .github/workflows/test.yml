@@ -18,7 +18,6 @@ jobs:
       run: |
         npm install
         npm run build --if-present
-        npm test
     - name: Login to Docker Hub
       run: docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
     - name: Build the Docker Image 
