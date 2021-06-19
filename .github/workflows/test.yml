@@ -31,26 +31,23 @@ jobs:
       run: |
           git config --global user.email "mohammedismayil10@gmail.com"
           git config --global user.name "mohammedismayil"
-          mkdir -p ~/.ssh/
-          cd  ~/.ssh/
-          touch  staging.key
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/staging.key
-          chmod 600 ~/.ssh/staging.key
-          cat >>~/.ssh/config <<END
-          Host staging
-            HostName $SSH_HOST
-            User $SSH_USER
-            IdentityFile ~/.ssh/staging.key
-            StrictHostKeyChecking no
-          END
-          ssh -i "$SSH_PRIVATE_KEY" $SSH_USER@$SSH_HOST
+          eval $(ssh-agent -s) # Run the SSH client 
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-233-123-151.ap-south-1.compute.amazonaws.com "docker pull registry.hub.docker.com/ismayil10/reactmern"
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-233-123-151.ap-south-1.compute.amazonaws.com "docker stop reactmerncontainer || true && docker rm reactmerncontainer || true"
+          ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-233-123-151.ap-south-1.compute.amazonaws.com "docker run -d -p 3001:80 --name reactmerncontainer registry.hub.docker.com/ismayil10/reactmern"    
+
           
 
-    - name: push Docker image to Server
-      run: |
-           docker pull registry.hub.docker.com/ismayil10/reactmern
-           docker stop reactmerncontainer || true && docker rm reactmerncontainer || true
-           docker run -d -p 3001:80 --name reactmerncontainer registry.hub.docker.com/ismayil10/reactmern
+    # - name: push Docker image to Server
+    #   run: |
+    #        docker pull registry.hub.docker.com/ismayil10/reactmern
+    #        docker stop reactmerncontainer || true && docker rm reactmerncontainer || true
+    #        docker run -d -p 3001:80 --name reactmerncontainer registry.hub.docker.com/ismayil10/reactmern
     # - run: |
     #    git config --global user.email "mohammedismayil10@gmail.com"
     #    git config --global user.name "mohammedismayil"
@@ -63,3 +60,15 @@ jobs:
     #    echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
     #    ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-233-123-151.ap-south-1.compute.amazonaws.com "docker stop reactmerncontainer || true && docker rm reactmerncontainer || true"
     #    ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-233-123-151.ap-south-1.compute.amazonaws.com "docker run -d -p 3001:80 --name reactmerncontainer registry.hub.docker.com/ismayil10/reactmern"    
+
+    #  mkdir -p ~/.ssh/
+    #       echo "$SSH_PRIVATE_KEY" > ~/.ssh/staging.key
+    #       chmod 600 ~/.ssh/staging.key
+    #       cat >>~/.ssh/config <<END
+    #       Host staging
+    #         HostName $SSH_HOST
+    #         User $SSH_USER
+    #         IdentityFile ~/.ssh/staging.key
+    #         StrictHostKeyChecking no
+    #       END
+    #       ssh -i "$SSH_PRIVATE_KEY" $SSH_USER@$SSH_HOST
