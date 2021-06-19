@@ -32,6 +32,7 @@ jobs:
           git config --global user.email "mohammedismayil10@gmail.com"
           git config --global user.name "mohammedismayil"
           mkdir -p ~/.ssh/
+          touch ~/.ssh/staging.key
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/staging.key
           chmod 600 ~/.ssh/staging.key
           cat >>~/.ssh/config <<END
