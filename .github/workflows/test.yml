@@ -21,7 +21,7 @@ jobs:
     - name: Login to Docker Hub
       run: docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
     - name: Build the Docker Image 
-      run: docker build . --file Dockerfile --tag ismayil10/reactMERN
+      run: docker build . --file Dockerfile --tag ismayil10/reactmern
     - name: Push the Docker Image 
       run: docker push ismayil10/reactMERN
       env:
