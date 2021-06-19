@@ -13,3 +13,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+    - uses: actions/setup-node@v1
+    - name: Test the Testcases 
+      run: |
+        npm install
+        npm run build --if-present
+        npm test
+    - name: Login to Docker Hub
+      run: docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
+    - name: Build the Docker Image 
+      run: docker build . --file Dockerfile --tag ismayil10/reactMERN
+    - name: Push the Docker Image 
+      run: docker push ismayil10/reactMERN
+      env:
+        CI: true
