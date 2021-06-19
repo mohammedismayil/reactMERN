@@ -37,7 +37,7 @@ jobs:
           git config --global user.name "mohammedismayil"
           echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
           ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-233-123-151.ap-south-1.compute.amazonaws.com "docker pull registry.hub.docker.com/ismayil10/reactmern"
-          echo "🎉 The jeob was automatically triggered by a ${{ github.event_name }} event."
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
           echo "🎉 copying the rsa private key from the server should be done properly - not even spaces"
           ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-233-123-151.ap-south-1.compute.amazonaws.com "docker stop reactmerncontainer || true && docker rm reactmerncontainer || true"
           ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-233-123-151.ap-south-1.compute.amazonaws.com "docker run -d -p 3001:80 --name reactmerncontainer registry.hub.docker.com/ismayil10/reactmern"    
