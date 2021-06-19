@@ -27,8 +27,8 @@ jobs:
       env:
         CI: true
     - run: |
-       apt-get install openssh-client
-       apt-get install git
+       sudo apt-get install openssh-client
+       sudo apt-get install git
        git config --global user.email "mohammedismayil10@gmail.com"
        git config --global user.name "mohammedismayil"
        eval $(ssh-agent -s) # Run the SSH client 
