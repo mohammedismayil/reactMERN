@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: docker-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -27,8 +27,8 @@ jobs:
       env:
         CI: true
     - run: |
-       apk update && apk add openssh-client
-       apk add git
+       apt-get install openssh-client
+       apt-get install git
        git config --global user.email "mohammedismayil10@gmail.com"
        git config --global user.name "mohammedismayil"
        eval $(ssh-agent -s) # Run the SSH client 
