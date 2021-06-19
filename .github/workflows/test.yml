@@ -18,4 +18,4 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - echo heyyyyy
+    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
