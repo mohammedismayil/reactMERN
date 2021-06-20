@@ -43,10 +43,10 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-          docker pull registry.hub.docker.com/ismayil10/reactmern
-          docker stop reactmerncontainer || true && docker rm reactmerncontainer || true
-          docker run -d -p 3001:80 --name reactmerncontainer registry.hub.docker.com/ismayil10/reactmern
-          docker system prune --all -f
+               docker pull registry.hub.docker.com/ismayil10/reactmern
+               docker stop reactmerncontainer || true && docker rm reactmerncontainer || true
+               docker run -d -p 3001:80 --name reactmerncontainer registry.hub.docker.com/ismayil10/reactmern
+               docker system prune --all -f
        
 
           
