@@ -6,7 +6,7 @@ function App() {
     <div className="App">
     <div>
       <h1>
-        Hello react Application from github removed using apple boy command script
+        Hello react Application from github removed withhout using apple boy command script
       </h1>
     </div>
     </div>
