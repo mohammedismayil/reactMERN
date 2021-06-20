@@ -45,9 +45,9 @@ jobs:
           END
     - name: Stop the server
       run: |
-        ssh staging docker pull registry.hub.docker.com/ismayil10/reactmern
-        ssh staging docker stop reactmerncontainer || true && docker rm reactmerncontainer || true
-        ssh staging docker run -d -p 3001:80 --name reactmerncontainer registry.hub.docker.com/ismayil10/reactmern
+        ssh staging 'docker pull registry.hub.docker.com/ismayil10/reactmern'
+        ssh staging 'docker stop reactmerncontainer || true && docker rm reactmerncontainer || true'
+        ssh staging 'docker run -d -p 3001:80 --name reactmerncontainer registry.hub.docker.com/ismayil10/reactmern'
           
 
     # - name: push Docker image to Server
