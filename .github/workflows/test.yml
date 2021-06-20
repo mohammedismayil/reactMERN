@@ -36,12 +36,18 @@ jobs:
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-          ssh -tt -i  "${{ secrets.SSH_PRIVATE_KEY }}" ec2-user@ec2-13-233-123-151.ap-south-1.compute.amazonaws.com
+    - name: Execute ssh command via using private key
+      uses: appleboy/ssh-action@master
+      with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
           docker pull registry.hub.docker.com/ismayil10/reactmern
           docker stop reactmerncontainer || true && docker rm reactmerncontainer || true
           docker run -d -p 3001:80 --name reactmerncontainer registry.hub.docker.com/ismayil10/reactmern
           docker system prune --all -f
-            
+       
 
           
 
