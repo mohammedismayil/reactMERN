@@ -32,7 +32,7 @@ jobs:
           git config --global user.email "mohammedismayil10@gmail.com"
           git config --global user.name "mohammedismayil"
           eval $(ssh-agent -s)
-          echo ${{ secrets.SSH_PRIVATE_KEY }} | tr -d '\r' | ssh-add -
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
           ssh-keyscan -H 'github.com' >> ~/.ssh/known_hosts
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
