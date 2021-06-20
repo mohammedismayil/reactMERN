@@ -17,7 +17,8 @@ services:
       - "3001:3001"
     depends_on:
       - mongo
-    env_file: /.env
+    env_file:
+         - .env
     environment:
       - NODE_ENV=production
     networks:
