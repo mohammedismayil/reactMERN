@@ -6,7 +6,7 @@ function App() {
     <div className="App">
     <div>
       <h1>
-        Hello react Application from github yeahhhhhs
+        Hello react Application from github removed
       </h1>
     </div>
     </div>
