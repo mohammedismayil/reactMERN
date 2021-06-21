@@ -6,8 +6,7 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
 };
-console.log(process.env.MONGO_URI);
-mongoose.connect(process.env.MONGO_URI, options)
+mongoose.connect(dotenv.MONGO_URI, options)
 .then(() => console.log("Data base connected"))
 .catch((e) => {
   console.log(process.env.MONGO_URI);
