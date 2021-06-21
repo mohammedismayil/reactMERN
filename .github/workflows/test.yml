@@ -58,6 +58,7 @@ jobs:
           END
     - name: Starting the Docker compose
       run: |
+         ssh staging 'docker image prune -a'
          ssh staging 'docker pull registry.hub.docker.com/ismayil10/react-app'
          ssh staging 'docker pull registry.hub.docker.com/ismayil10/api-server'
          ssh staging 'docker run -d -p 5000:5000 --name api-server registry.hub.docker.com/ismayil10/api-server'
