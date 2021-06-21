@@ -25,11 +25,11 @@ jobs:
         docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
         docker-compose down
         cd client && docker build . --file Dockerfile --tag ismayil10/react-app
-        docker push ismayil10/reactmern:react-app
+        docker push registry.hub.docker.com/ismayil10/reactmern:react-app
         cd ..
         cd server && docker build . --file Dockerfile --tag ismayil10/api-server
         cd ..
-        docker push ismayil10/reactmern:api-server
+        docker push registry.hub.docker.com/ismayil10/reactmern:api-server
         
       env:
         CI: true
