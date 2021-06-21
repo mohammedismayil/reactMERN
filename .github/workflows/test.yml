@@ -23,7 +23,6 @@ jobs:
     - name: Build the stack
       run: |
         docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
-        docker-compose down
         cd client && docker build . --file Dockerfile --tag react-app
         docker push react-app
         cd ..
@@ -31,8 +30,8 @@ jobs:
         cd ..
         docker push api-server
         
-      env:
-        CI: true
+    # env:
+    #   CI: true
     #  docker-compose up --build --remove-orphans    
     # - name: Build the Docker Image 
     #   run: docker build . --file Dockerfile --tag ismayil10/reactmern
