@@ -24,9 +24,9 @@ jobs:
       run: |
         docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
         docker-compose down
-        cd client && docker build -t react-app .
+        cd client && docker build . --file Dockerfile --tag ismayil10/react-app
         cd ..
-        cd server && docker build -t api-server .
+        cd server && docker build . --file Dockerfile --tag ismayil10/api-server
         cd ..
         docker-compose push ismayil10/react-app
         docker-compose push ismayil10/api-server
