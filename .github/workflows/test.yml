@@ -24,11 +24,11 @@ jobs:
       run: |
         docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
         cd client && docker build . --file Dockerfile --tag react-app
-        docker push react-app
+        docker push ismayil10/react-app
         cd ..
         cd server && docker build . --file Dockerfile --tag api-server
         cd ..
-        docker push api-server
+        docker push ismayil10/api-server
         
     # env:
     #   CI: true
