@@ -60,8 +60,10 @@ jobs:
       run: |
          ssh staging 'docker pull registry.hub.docker.com/ismayil10/react-app'
          ssh staging 'docker pull registry.hub.docker.com/ismayil10/api-server'
-         ssh staging 'docker run -d -p 5000:5000 registry.hub.docker.com/ismayil10/api-server'
-         ssh staging 'docker run -i -d -p 3000:3000 registry.hub.docker.com/ismayil10/react-app'
+         ssh staging 'docker stop api-server || true && docker rm api-server || true'
+         ssh staging 'docker stop react-app || true && docker rm react-app || true'
+         ssh staging 'docker run -d -p --name api-server 5000:5000 registry.hub.docker.com/ismayil10/api-server'
+         ssh staging 'docker run -i -d -p --name react-app 3000:3000 registry.hub.docker.com/ismayil10/react-app'
         
        
 #  ssh staging 'docker-compose down'
