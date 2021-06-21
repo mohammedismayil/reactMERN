@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectionString = 'mongodb://localhost:27017/reactmern';
 
-mongoose.connect(connectionString, { useNewUrlParser: true }).catch((e) => {
+mongoose.connect(connectionString, { useNewUrlParser: true },{ useMongoClient: true }).catch((e) => {
   console.error('Connection error', e.message);
 });
 
