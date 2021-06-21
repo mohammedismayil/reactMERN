@@ -23,13 +23,7 @@ jobs:
     - name: Build the stack
       run: |
         docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
-        docker-compose down
-        cd client && docker build -t react-app . 
-        cd ..
-        cd server && docker build -t api-server . 
-        cd ..
-        docker-compose build
-        docker-compose up --build --remove-orphans
+       
     # - name: Build the Docker Image 
     #   run: docker build . --file Dockerfile --tag ismayil10/reactmern
     # - name: Push the Docker Image 
@@ -37,28 +31,32 @@ jobs:
     #   env:
     #     CI: true
 
-    # - name: Configure SSH
-    #   run: |
-    #       git config --global user.email "mohammedismayil10@gmail.com"
-    #       git config --global user.name "mohammedismayil"
-    #       eval $(ssh-agent -s)
-    #       echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
-    #       mkdir -p ~/.ssh/
-    #       echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/staging.key
-    #       chmod 600 ~/.ssh/staging.key
-    #       cat >>~/.ssh/config <<END
-    #       Host staging
-    #         HostName "${{ secrets.SSH_HOST }}"
-    #         User "${{ secrets.SSH_USER }}"
-    #         IdentityFile ~/.ssh/staging.key
-    #         StrictHostKeyChecking no
-    #       END
-    # - name: Stop the server
-    #   run: |
-    #     ssh staging 'docker pull registry.hub.docker.com/ismayil10/reactmern'
-    #     ssh staging 'docker stop reactmerncontainer || true && docker rm reactmerncontainer || true'
-    #     ssh staging 'docker run -d -p 3001:80 --name reactmerncontainer registry.hub.docker.com/ismayil10/reactmern'
-          
+    - name: Configure SSH
+      run: |
+          git config --global user.email "mohammedismayil10@gmail.com"
+          git config --global user.name "mohammedismayil"
+          eval $(ssh-agent -s)
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName "${{ secrets.SSH_HOST }}"
+            User "${{ secrets.SSH_USER }}"
+            IdentityFile ~/.ssh/staging.key
+            StrictHostKeyChecking no
+          END
+    - name: Starting the Docker compose
+      run: |
+        
+        ssh staging 'docker-compose down'
+        ssh staging 'cd client && docker build -t react-app .'
+        ssh staging 'cd ..'
+        ssh staging 'cd server && docker build -t api-server . ''
+        ssh staging 'cd ..'
+        ssh staging 'docker-compose build'
+        ssh staging 'docker-compose up --build --remove-orphans'
 
     # - name: push Docker image to Server
     #   run: |
