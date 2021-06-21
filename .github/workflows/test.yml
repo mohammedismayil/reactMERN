@@ -25,11 +25,11 @@ jobs:
         docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
         docker-compose down
         cd client && docker build . --file Dockerfile --tag react-app
-        docker push registry.hub.docker.com/ismayil10/reactmern:react-app
+        docker push react-app
         cd ..
         cd server && docker build . --file Dockerfile --tag api-server
         cd ..
-        docker push registry.hub.docker.com/ismayil10/reactmern:api-server
+        docker push api-server
         
       env:
         CI: true
@@ -61,8 +61,8 @@ jobs:
       run: |
          ssh staging 'docker pull registry.hub.docker.com/ismayil10/reactmern:react-app'
          ssh staging 'docker pull registry.hub.docker.com/ismayil10/reactmern:api-server'
-         ssh staging 'docker run -d -p 5000:5000 api-server'
-         ssh staging 'docker run -i -d -p 3000:3000 react-app'
+         ssh staging 'docker run -d -p 5000:5000 registry.hub.docker.com/ismayil10/reactmern:api-server'
+         ssh staging 'docker run -i -d -p 3000:3000 registry.hub.docker.com/ismayil10/reactmern:react-app'
         
        
 #  ssh staging 'docker-compose down'
