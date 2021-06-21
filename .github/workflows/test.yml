@@ -30,7 +30,8 @@ jobs:
         cd ..
         docker-compose push ismayil10/react-app
         docker-compose push ismayil10/api-server
-       
+      env:
+        CI: true
     #  docker-compose up --build --remove-orphans    
     # - name: Build the Docker Image 
     #   run: docker build . --file Dockerfile --tag ismayil10/reactmern
