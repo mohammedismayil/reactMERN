@@ -22,10 +22,11 @@ jobs:
       run: docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
     - name: Build the stack
       run: |
+        docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
         docker-compose down
-        cd client && docker build -t react-app . && docker push react-app
+        cd client && docker build -t react-app . && docker push ismayil10/reactmern:react-app
         cd ..
-        cd server && docker build -t api-server . && docker push api-server
+        cd server && docker build -t api-server . && docker push ismayil10/reactmern:api-server
         cd ..
         docker-compose build
         docker-compose up --build --remove-orphans
