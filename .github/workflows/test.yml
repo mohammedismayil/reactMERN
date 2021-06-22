@@ -58,9 +58,10 @@ jobs:
           END
     - name: Starting the Docker compose
       run: |
+         ssh staging 'docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"'
          ssh staging 'docker image prune -a'
-         ssh staging 'docker pull registry.hub.docker.com/ismayil10/react-app:latest'
-         ssh staging 'docker pull registry.hub.docker.com/ismayil10/api-server:latest'
+         ssh staging 'docker pull ismayil10/react-app:latest'
+         ssh staging 'docker pull ismayil10/api-server:latest'
          ssh staging 'docker run -d -p 5000:5000 --name api-server ismayil10/api-server'
          ssh staging 'docker run -i -d -p 3000:3000 --name react-app ismayil10/react-app'
         
