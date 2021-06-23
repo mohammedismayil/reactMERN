@@ -6,7 +6,10 @@ RUN apk update
 RUN apk add mongodb=3.4.4-r0
 
 VOLUME ["/data/db"]
+VOLUME [ "/etc" ]
+
 WORKDIR /data
 
 EXPOSE 27018
+CMD ["mongod", "--config", "-f", "/etc/mongodb.conf"]
 # /
