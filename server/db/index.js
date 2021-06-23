@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const connectionString = 'mongodb://127.0.0.1:27018/reactmern'
+const connectionString = 'mongodb://localhost:27018/reactmern'
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
