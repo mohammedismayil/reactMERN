@@ -26,6 +26,8 @@ jobs:
         cd client && docker build . --file Dockerfile -t ismayil10/react-app
         docker push ismayil10/react-app
         cd ..
+        cd server && cd db && docker build . --file Dockerfile -t ismayil10/mongo
+        cd ..
         cd server && docker build . --file Dockerfile -t ismayil10/api-server
         cd ..
         docker push ismayil10/api-server
@@ -62,6 +64,8 @@ jobs:
          ssh staging 'docker image prune -a'
          ssh staging 'docker pull ismayil10/react-app:latest'
          ssh staging 'docker pull ismayil10/api-server:latest'
+         ssh staging 'docker pull ismayil10/mongo:latest'
+         ssh staging 'docker run -i -d -p 27018:27018 --name mongo ismayil10/mongo'
          ssh staging 'docker run -i -d -p 5000:5000 --name api-server ismayil10/api-server'
          ssh staging 'docker run -i -d -p 3000:3000 --name react-app ismayil10/react-app'
         
