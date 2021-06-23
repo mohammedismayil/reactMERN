@@ -27,6 +27,7 @@ jobs:
         docker push ismayil10/react-app
         cd ..
         cd server && cd db && docker build . --file Dockerfile -t ismayil10/mongo
+        docker push ismayil10/mongo
         cd .. && cd ..
         cd server && docker build . --file Dockerfile -t ismayil10/api-server
         cd ..
