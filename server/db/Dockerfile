@@ -11,5 +11,5 @@ VOLUME [ "/etc" ]
 WORKDIR /data
 
 EXPOSE 27018
-CMD ["mongod", "--config", "-f", "/etc/mongodb.conf"]
+CMD ["mongod", "-f" , "/etc/mongodb.conf"]
 # /
