@@ -23,13 +23,13 @@ jobs:
     - name: Build the stack
       run: |
         docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
-        cd client && docker build . --file Dockerfile -t ismayil10/react-app
+        cd client && docker build . --file Dockerfile -t react-app
         docker push ismayil10/react-app:react-app
         cd ..
-        cd server && cd db && docker build . --file Dockerfile -t ismayil10/mongo
+        cd server && cd db && docker build . --file Dockerfile -t mongo
         docker push ismayil10/mongo:mongo
         cd .. && cd ..
-        cd server && docker build . --file Dockerfile -t ismayil10/api-server
+        cd server && docker build . --file Dockerfile -t api-server
         cd ..
         docker push ismayil10/api-server:api-server
         
