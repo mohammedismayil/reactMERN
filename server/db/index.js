@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
-const connectionString = 'mongodb://mongo:27017/reactmern'
+const connectionString = 'mongodb://127.0.0.1:27017/reactmern'
 const options = {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true 
 };
 mongoose.connect(connectionString, options)
 .then(() => console.log("Data base connected"))
