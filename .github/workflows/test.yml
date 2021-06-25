@@ -65,8 +65,8 @@ jobs:
          ssh staging 'rm -rfv reactMERN'
          ssh staging 'git clone https://github.com/mohammedismayil/reactMERN.git'
          ssh staging 'cd reactMERN'
-         ssh staging 'docker-compose build'
-         ssh staging 'docker-compose up'
+         ssh staging 'make build'
+         ssh staging 'make run'
     
 # ssh staging 'rm -rfv reactMERN'
 #  ssh staging 'docker-compose down'
