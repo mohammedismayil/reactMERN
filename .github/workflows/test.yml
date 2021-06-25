@@ -66,10 +66,10 @@ jobs:
          ssh staging 'docker pull ismayil10/react-app:latest'
          ssh staging 'docker pull ismayil10/api-server:latest'
          ssh staging 'docker pull ismayil10/mongo:latest'
-         ssh staging 'docker run -i -d -p 27017:27017 mongo'  
+         ssh staging 'docker run -i -d -p 27017:27017 mongo' 
          ssh staging 'docker run -i -d -p 5000:5000 --name api-server ismayil10/api-server'
          ssh staging 'docker run -i -d -p 3000:3000 --name react-app ismayil10/react-app'
-    
+    #  ssh staging 'docker run -i -d -p 27017:27017 mongo' 
     # ssh staging 'docker stop $(docker ps -a -q)'
     #      ssh staging 'docker rm $(docker ps -a -q)'
     #      ssh staging 'docker rmi $(docker images -a -q)'
