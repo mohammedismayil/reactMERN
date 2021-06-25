@@ -64,6 +64,7 @@ jobs:
          ssh staging 'docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"'
          ssh staging 'git clone https://github.com/mohammedismayil/reactMERN.git'
          ssh staging 'cd reactMERN'
+         ssh staging 'docker-compose build'
          ssh staging 'docker-compose up'
     
 # ssh staging 'rm -rfv reactMERN'
