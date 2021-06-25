@@ -5,7 +5,10 @@ WORKDIR /usr/src/app
 COPY ./package.json ./
 COPY ./yarn.lock ./
 
+RUN yarn run data:import
+
 RUN yarn install
+
 
 COPY . .
 
