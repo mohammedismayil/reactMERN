@@ -63,9 +63,9 @@ jobs:
       run: |
          ssh staging 'docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"'
          ssh staging 'docker image prune -a'
-         ssh staging 'docker stop $(docker ps -a -q)''
+         ssh staging 'docker stop $(docker ps -a -q)'
          ssh staging 'docker rm $(docker ps -a -q)'
-         ssh staging 'docker rmi $(docker images -a -q)''
+         ssh staging 'docker rmi $(docker images -a -q)'
          ssh staging 'docker pull ismayil10/react-app:latest'
          ssh staging 'docker pull ismayil10/api-server:latest'
          ssh staging 'docker pull ismayil10/mongo:latest'
