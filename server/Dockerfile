@@ -14,7 +14,7 @@ COPY . .
 
 EXPOSE 5000
 
-CMD [ "index.js" ]
+CMD [ "server.js" ]
 
 
 
