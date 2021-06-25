@@ -1,17 +1,16 @@
 FROM node:14-slim
 
+# Create app directory
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY ./package.json ./
-COPY ./yarn.lock ./
+# Install app dependencies
+COPY package.json /usr/src/app/
+RUN npm install
 
-
-
-RUN yarn install
-
-RUN yarn run data:import
-COPY . .
-
+RUN npm run data:import
+# Bundle app source
+COPY . /usr/src/app
 EXPOSE 5000
 
 CMD [ "server.js" ]
