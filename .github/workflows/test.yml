@@ -62,7 +62,7 @@ jobs:
     - name: Starting the Docker compose
       run: |
          ssh staging 'docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"'
-         ssh staging 'sudo rmdir reactMERN'
+         ssh staging 'sudo rmdir -rf reactMERN'
          ssh staging 'git clone https://github.com/mohammedismayil/reactMERN.git'
          ssh staging 'cd reactMERN'
          ssh staging 'docker-compose up'
