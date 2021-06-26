@@ -1,9 +1,6 @@
 build:
-	cd server && $(MAKE) build
-
-    
 	cd server && cd db && $(MAKE) build
-	
+	cd server && $(MAKE) build
 	cd client && $(MAKE) build
 
 run:

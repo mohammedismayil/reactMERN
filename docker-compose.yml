@@ -1,31 +1,44 @@
-version: "3"
+version: "3.7"
 services:
-  react-app:
-    image: react-app
-    stdin_open: true
-    ports: 
-      - "3000:3000"
-    networks:
-      - mern-app
-  api-server:
-    image: api-server
+  frontend:
+    build: frontend
     ports:
-      - "5000:5000"
+      - 3000:3000
+    stdin_open: true
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    container_name: frontend
+    restart: always
     networks:
-      - mern-app
+      - react-express
+    depends_on:
+      - backend
+
+  backend:
+    container_name: backend
+    restart: always
+    build: backend
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
     depends_on:
       - mongo
-  mongo:
-    image: mongo:3.6.19-xenial
-    ports:
-      - "27018:27018"
     networks:
-      - mern-app
+      - express-mongo
+      - react-express
+    expose: 
+      - 3000
+  mongo:
+    container_name: mongo
+    restart: always
+    image: mongo:4.2.0
     volumes:
-      - mongo-data:/data/db
+      - ./data:/data/db
+    networks:
+      - express-mongo
+    expose:
+      - 27017
 networks:
-  mern-app:
-    driver: bridge
-volumes:
-  mongo-data:
-    driver: local
+  react-express:
+  express-mongo:
