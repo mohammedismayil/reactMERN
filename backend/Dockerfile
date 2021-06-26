@@ -1,14 +1,16 @@
-FROM node:lts-buster-slim
+FROM node:14-slim
 
 # Create app directory
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY package.json /usr/src/app/package.json
-COPY package-lock.json /usr/src/app/package-lock.json
+# Install app dependencies
+COPY package.json /usr/src/app/
 RUN npm install
 
+# RUN npm run data:import
+# Bundle app source
 COPY . /usr/src/app
+EXPOSE 5000
 
-EXPOSE 3000
-
-CMD ["node","server.js"]
+CMD [ "server.js" ]
