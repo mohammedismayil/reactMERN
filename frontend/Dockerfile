@@ -9,10 +9,10 @@ COPY package.json /usr/src/app
 COPY package-lock.json /usr/src/app
 
 # Install dependecies
-RUN npm set progress=false \
-   && npm config set depth 0 \
-   && npm i install
-RUN npm start
+# RUN npm set progress=false \
+#    && npm config set depth 0 \
+#    && npm i install
+# RUN npm start
 
 # Get all the code needed to run the app
 COPY . /usr/src/app
