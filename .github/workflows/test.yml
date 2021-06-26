@@ -23,10 +23,12 @@ jobs:
     - name: Build the stack
       run: |
         docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
+        cd backend && cd config && docker build . --file Dockerfile -t ismayil10/mongo
+        cd .. && cd ..
         cd frontend && docker build . --file Dockerfile -t ismayil10/react-app
         docker push ismayil10/react-app
         cd ..
-        cd backend && docker build . --file Dockerfile -t ismayil10/api-server
+        docker build . --file Dockerfile -t ismayil10/api-server
         docker push ismayil10/api-server
 
     - name: Configure SSH
