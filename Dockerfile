@@ -4,9 +4,10 @@ FROM node:14-slim
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+RUN yarn install
 # Install app dependencies
 COPY package.json /usr/src/app/
-RUN yarn install
+
 
 # RUN npm run data:import
 # Bundle app source
