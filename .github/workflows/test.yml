@@ -24,6 +24,7 @@ jobs:
       run: |
         docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
         cd backend && cd config && docker build . --file Dockerfile -t ismayil10/mongo
+        docker push ismayil10/mongo
         cd .. && cd ..
         cd frontend && docker build . --file Dockerfile -t ismayil10/react-app
         docker push ismayil10/react-app
