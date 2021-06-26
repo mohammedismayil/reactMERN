@@ -38,7 +38,7 @@ services:
     networks:
       - express-mongo
     ports:
-       - 27017:27017
+       - 27018:27018
 networks:
   react-express:
   express-mongo:
