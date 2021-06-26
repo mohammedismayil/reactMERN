@@ -23,25 +23,11 @@ jobs:
     - name: Build the stack
       run: |
         docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"
-        cd client && docker build . --file Dockerfile -t ismayil10/react-app
+        cd frontend && docker build . --file Dockerfile -t ismayil10/react-app
         docker push ismayil10/react-app
         cd ..
-        cd server && cd db && docker build . --file Dockerfile -t ismayil10/mongo
-        docker push ismayil10/mongo
-        cd .. && cd ..
-        cd server && docker build . --file Dockerfile -t ismayil10/api-server
-        cd ..
+        cd backend && docker build . --file Dockerfile -t ismayil10/api-server
         docker push ismayil10/api-server
-        
-    # env:
-    #   CI: true
-    #  docker-compose up --build --remove-orphans    
-    # - name: Build the Docker Image 
-    #   run: docker build . --file Dockerfile --tag ismayil10/reactmern
-    # - name: Push the Docker Image 
-    #   run: docker push ismayil10/reactmern
-    #   env:
-    #     CI: true
 
     - name: Configure SSH
       run: |
@@ -62,11 +48,3 @@ jobs:
     - name: Starting the Docker compose
       run: |
          ssh staging 'docker login --username "${{ secrets.Docker_username }}" --password "${{ secrets.Docker_password }}"'
-         ssh staging 'rm -rfv reactMERN'
-         ssh staging 'git clone https://github.com/mohammedismayil/reactMERN.git'
-         ssh staging 'cd reactMERN'
-         ssh staging 'make build'
-         ssh staging 'make run'
-    
-# ssh staging 'rm -rfv reactMERN'
-#  ssh staging 'docker-compose down'
