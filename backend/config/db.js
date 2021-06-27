@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect('mongodb://mongo:27018/reactmern', {
+    const conn = await mongoose.connect('mongodb://127.0.0.1:27018/reactmern', {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       useCreateIndex: true,
