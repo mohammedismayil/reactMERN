@@ -1,9 +1,11 @@
+// import { connect } from "mongoose";
+
 /**
  * Created by Syed Afzal
  */
  const mongoose = require("mongoose");
 
- exports.connect = (app) => {
+ const connect = (app) => {
    const options = {
      useNewUrlParser: true,
      autoIndex: false, // Don't build indexes
@@ -30,3 +32,4 @@
    };
    connectWithRetry();
  };
+//  export.connect = connect ;

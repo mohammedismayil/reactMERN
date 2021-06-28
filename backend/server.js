@@ -4,21 +4,48 @@ import dotenv from 'dotenv'
 import colors from 'colors'
 import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
-// import connectDB from './config/db.js'
-const db = require("./config/db");
+// import db from './config/db.js'
+// const db = require("./config/db");
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
-
+import mongoose from 'mongoose'
 dotenv.config()
 
-//connection from db here
-db.connect(app);
 
 const app = express()
 
 app.use(morgan('dev'))
+
+//connection from db here
+// db.connect(app);
+
+const options = {
+  useNewUrlParser: true,
+  autoIndex: false, // Don't build indexes
+  reconnectTries: 30, // Retry up to 30 times
+  reconnectInterval: 500, // Reconnect every 500ms
+  poolSize: 10, // Maintain up to 10 socket connections
+  // If not connected, return errors immediately rather than waiting for reconnect
+  bufferMaxEntries: 0,
+};
+
+const connectWithRetry = () => {
+  mongoose.Promise = global.Promise;
+  console.log("MongoDB connection with retry");
+  mongoose
+    .connect('mongodb://mongo:27017/reactmern', options)
+    .then(() => {
+      console.log("MongoDB is connected");
+      app.emit("ready");
+    })
+    .catch((err) => {
+      console.log("MongoDB connection unsuccessful, retry after 2 seconds.");
+      setTimeout(connectWithRetry, 2000);
+    });
+};
+connectWithRetry();
 
 
 app.use(express.json())

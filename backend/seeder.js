@@ -6,10 +6,37 @@ import products from './data/products.js'
 import User from './models/userModel.js'
 import Product from './models/productModel.js'
 import Order from './models/orderModel.js'
-import connectDB from './config/db.js'
+// import connectDB from './config/db.js'
 
 dotenv.config()
 
+const connectDB =  async () => {
+  const options = {
+    useNewUrlParser: true,
+    autoIndex: false, // Don't build indexes
+    reconnectTries: 30, // Retry up to 30 times
+    reconnectInterval: 500, // Reconnect every 500ms
+    poolSize: 10, // Maintain up to 10 socket connections
+    // If not connected, return errors immediately rather than waiting for reconnect
+    bufferMaxEntries: 0,
+  };
+  
+  const connectWithRetry = () => {
+    mongoose.Promise = global.Promise;
+    console.log("MongoDB connection with retry");
+    mongoose
+      .connect('mongodb://mongo:27017/reactmern', options)
+      .then(() => {
+        console.log("MongoDB is connected");
+        app.emit("ready");
+      })
+      .catch((err) => {
+        console.log("MongoDB connection unsuccessful, retry after 2 seconds.");
+        setTimeout(connectWithRetry, 2000);
+      });
+  };
+  connectWithRetry()
+}
 
 
 const importData = async () => {

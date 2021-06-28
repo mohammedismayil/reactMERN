@@ -15,6 +15,6 @@ RUN npm install
 # Bundle app source
 COPY . /usr/src/app
 EXPOSE 3000
-CMD ["node","seeder.js"]
+# CMD ["node","seeder.js"]
 
 CMD ["node","server.js"]
