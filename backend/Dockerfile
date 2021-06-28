@@ -18,4 +18,5 @@ EXPOSE 3000
 # CMD ["node","seeder.js"]
 
 CMD ["node","server.js"]
-CMD ["node","seeder.js" ]
+
+# CMD ["node","server.js"]
