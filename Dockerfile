@@ -14,6 +14,6 @@ RUN npm install
 # RUN npm run data:import
 # Bundle app source
 COPY . /usr/src/app
-EXPOSE 5000
+EXPOSE 3000
 
 CMD ["node","backend/server"]
